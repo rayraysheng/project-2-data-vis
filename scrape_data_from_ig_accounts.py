@@ -98,7 +98,7 @@ def scrape(account_name):
         ## Scroll up a little and wait, there may be a timeout
         if current_list_length == previous_list_length:
             driver.execute_script("window.scrollBy(0, -1000);")
-            time.sleep(10 * 60)
+            time.sleep(8 * 60)
 
         # Check progress
         time_check = datetime.strftime(datetime.now(), '%I: %M: %S.%f')
@@ -120,16 +120,7 @@ def scrape(account_name):
 
 # Here are the account names
 accounts_list = [
-    'michaelkors',
-    'bananarepublic',
-    'majeofficiel',
-    'aliceandolivia',
-    'coach',
-    'ferragamo',
-    'chloe',
-    'burberry',
-    'gucci',
-    'toryburch'
+
 ]
 
 
