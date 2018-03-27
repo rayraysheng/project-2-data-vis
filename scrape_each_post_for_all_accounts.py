@@ -22,15 +22,14 @@ from bs4 import BeautifulSoup as bs
 
 # Here are the account names
 accounts_list = [
-    'burberry',
-    'gucci',
     'toryburch',
     'michaelkors',
     'bananarepublic',
     'aliceandolivia',
     'coach',
     'ferragamo',
-    'chloe'
+    'chloe',
+    'gucci'
 ]
 
 
@@ -110,9 +109,14 @@ for account_name in accounts_list:
     # This section of the code fetches post datetime
 
         # Use BeautifulSoup to find the hidden datetime attribute
-        post_time_broth = driver.find_elements_by_class_name('_djdmk')[0].get_attribute('innerHTML')
-        post_time_soup = bs(post_time_broth, 'html.parser')
-        post_datetime_str = post_time_soup.find('time')['datetime']
+        post_datetime_str = None
+
+        try:
+            post_time_broth = driver.find_elements_by_class_name('_djdmk')[0].get_attribute('innerHTML')
+            post_time_soup = bs(post_time_broth, 'html.parser')
+            post_datetime_str = post_time_soup.find('time')['datetime']
+        except:
+            pass
         
     # This section of the code gets the caption word count and number of hastags/@s
 
