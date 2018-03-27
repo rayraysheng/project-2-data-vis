@@ -74,7 +74,7 @@ for account_name in accounts_list:
             ## Parse the string to get a numeric like count
             like_count = int(like_count_str.split(' ')[0].replace(',', ''))
         except:
-            # If it doesn't, then it's a video
+            # If it has a '_m5zti' class div, then it's a video
             ## Find the tag that contains the view count string
             view_count_str = driver.find_elements_by_class_name('_m5zti')[0].text
             ## Parse the string to get a numeric view count
@@ -85,10 +85,12 @@ for account_name in accounts_list:
 
         if len(next_button_list) > 0:   # Check for next button
             post_type = 'album'
-        elif like_count in locals():   # Check for like count
+        elif like_count is not None:   # Check for like count
             post_type = 'photo'
-        else:
+        elif view_count is not None:   # Check for view count
             post_type = 'video'
+        else:
+            pot_type = 'unspecified'
 
         # Fetch post datetime
         ## Use BeautifulSoup to find the hidden datetime attribute
@@ -97,11 +99,20 @@ for account_name in accounts_list:
         post_datetime_str = post_time_soup.find('time')['datetime']
 
         # Record the caption word count and number of hastags/@s
-        ## Fetch everything in the caption area
-        caption_str = driver.find_elements_by_class_name('_ezgzd')[0].text
-        ## Split the whole string into a list of words
-        caption_word_list = caption_str.replace('\n', ' ').replace('.', '')        .replace(',', '').replace('!', '').replace('?', '').split(' ')
+        ## Set up an empty caption word list in case if the '_ezgzd' div doesn't exist
+        ## i.e. there's nothing in the catpion area
+        caption_word_list = []
+
+        ## Fetch everything in the caption area if one exists
+        caption_as_list = driver.find_elements_by_class_name('_ezgzd')
+
+        if len(caption_as_list) > 0:
+            caption_str = caption_as_list[0].text
+            ## Split the whole string into a list of words
+            caption_word_list = caption_str.replace('\n', ' ').replace('.', '')        .replace(',', '').replace('!', '').replace('?', '').split(' ')
+        
         caption_length = len(caption_word_list)
+
         ## Derive the hashtag and @ data
         has_hashtag = False
         hashtag_count = 0
@@ -110,10 +121,10 @@ for account_name in accounts_list:
         at_count = 0
 
         ## Iterate through the caption words to count hashtags and @s
-        for each in caption_word_list:
-            if '#' in each:
+        for word in caption_word_list:
+            if '#' in word:
                 hashtag_count += 1
-            elif '@' in each:
+            elif '@' in word:
                 at_count += 1
             else:
                 pass
@@ -161,6 +172,6 @@ for account_name in accounts_list:
     account_data_dict = json.load(open(f'data/{account_name}.json'))
     account_data_dict['post_data_list'] = post_data_list
 
-    with open(f'appended_{account_name}.json', 'w') as file:
-            json.dump(account_data_dict, file)
+    with open(f'data/appended/appended_{account_name}.json', 'w') as file:
+        json.dump(account_data_dict, file)
 
