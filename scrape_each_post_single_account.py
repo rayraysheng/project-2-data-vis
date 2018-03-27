@@ -100,7 +100,7 @@ for post_url in post_urls_list:
     elif len(play_button_as_list) > 0:   # Check for play button
         post_type = 'video'
     else:
-        pot_type = 'photo'
+        post_type = 'photo'
     
 # This section of the code fetches post datetime
 
@@ -170,7 +170,7 @@ for post_url in post_urls_list:
     already_recorded = len(post_data_list)
     total_to_record = len(post_urls_list)
     time_check = datetime.strftime(datetime.now(), '%I: %M: %S.%f')
-    print(f'{account_name} -- {time_check}: {already_recorded} of {total_to_record}')
+    print(f'{account_name} -- {time_check}: {already_recorded} of {total_to_record} -- {post_type}')
 
 # CLose the browser at the end
 driver.close()

@@ -27,7 +27,6 @@ accounts_list = [
     'toryburch',
     'michaelkors',
     'bananarepublic',
-    'majeofficiel',
     'aliceandolivia',
     'coach',
     'ferragamo',
@@ -39,11 +38,6 @@ accounts_list = [
 
 
 # Iterate through each account and let the code do its thang
-
-# Use this to check whether or not the page has refreshed
-# in case of running into rate-limiting issues
-refresh_check = 'initial string, does not matter'
-
 for account_name in accounts_list:
     
     # Load the json file to read the urls list
@@ -58,83 +52,108 @@ for account_name in accounts_list:
 
     # Loop through the posts and scrape data
     for post_url in post_urls_list:
-
+        
         # Visit post
         driver.get(post_url)
 
-        # Fetch like or view count
-        ## Keep placeholders for like and view counts
+    # This section of the code fetches likes or views count
+
+        # Keep placeholders for like and view counts
         like_count = None
         view_count = None
 
-        try:
-            # If the page has a '_nzn1h' class div, then it's a photo
-            ## Find the tag that contains the like count string
-            like_count_str = driver.find_elements_by_class_name('_nzn1h')[0].text
-            ## Parse the string to get a numeric like count
-            like_count = int(like_count_str.split(' ')[0].replace(',', ''))
-        except:
-            # If it has a '_m5zti' class div, then it's a video
-            ## Find the tag that contains the view count string
-            view_count_str = driver.find_elements_by_class_name('_m5zti')[0].text
-            ## Parse the string to get a numeric view count
-            view_count = int(view_count_str.split(' ')[0].replace(',', ''))
+        # Check to see if the post has likes or views
+        like_area_as_list = driver.find_elements_by_class_name('_nt9ow')
+        view_area_as_list = driver.find_elements_by_class_name('_sokb7')
 
-        # See if the post is a album, by looking for the next button
-        next_button_list = driver.find_elements_by_class_name('coreSpriteRightChevron')
+        # For posts that have likes
+        if len(like_area_as_list) > 0:
+            # Post shows like count only if there are enough likes
+            like_count_as_list = driver.find_elements_by_class_name('_nzn1h')
 
-        if len(next_button_list) > 0:   # Check for next button
+            # If there's a like count shown, just scrape and parse
+            if len(like_count_as_list) > 0:
+                like_count_str = driver.find_elements_by_class_name('_nzn1h')[0].text
+                like_count = int(like_count_str.split(' ')[0].replace(',', ''))
+            # If not enough likes, count how many users clicked like
+            else:
+                liked_users_list = driver.find_elements_by_class_name('_de460')
+                like_count = len(liked_users_list)
+
+        # For posts that have views
+        elif len(view_area_as_list) > 0:
+
+            # As long as there are views, a numeric value will show
+            view_count_as_list = driver.find_elements_by_class_name('_m5zti')
+
+            # Just scrape and parse
+            if len(view_count_as_list) > 0:
+                view_count_str = driver.find_elements_by_class_name('_m5zti')[0].text
+                view_count = int(view_count_str.split(' ')[0].replace(',', ''))
+
+    # This section of the code checks for post type
+
+        # See if the post is an album, by looking for the next button
+        next_button_as_list = driver.find_elements_by_class_name('coreSpriteRightChevron')
+        
+        # See if the post if a video, by looking for the play button
+        play_button_as_list = driver.find_elements_by_class_name('_7thjo')
+        
+        # Assign post type
+        if len(next_button_as_list) > 0:   # Check for next button
             post_type = 'album'
-        elif like_count is not None:   # Check for like count
-            post_type = 'photo'
-        elif view_count is not None:   # Check for view count
+        elif len(play_button_as_list) > 0:   # Check for play button
             post_type = 'video'
         else:
-            pot_type = 'unspecified'
+            post_type = 'photo'
+        
+    # This section of the code fetches post datetime
 
-        # Fetch post datetime
-        ## Use BeautifulSoup to find the hidden datetime attribute
+        # Use BeautifulSoup to find the hidden datetime attribute
         post_time_broth = driver.find_elements_by_class_name('_djdmk')[0].get_attribute('innerHTML')
         post_time_soup = bs(post_time_broth, 'html.parser')
         post_datetime_str = post_time_soup.find('time')['datetime']
+        
+    # This section of the code gets the caption word count and number of hastags/@s
 
-        # Record the caption word count and number of hastags/@s
-        ## Set up an empty caption word list in case if the '_ezgzd' div doesn't exist
-        ## i.e. there's nothing in the catpion area
+        # Set up an empty caption word list in case if the '_ezgzd' div doesn't exist
+        # i.e. there's nothing in the catpion area
         caption_word_list = []
 
-        ## Fetch everything in the caption area if one exists
+        # Fetch everything in the caption area if one exists
         caption_as_list = driver.find_elements_by_class_name('_ezgzd')
 
         if len(caption_as_list) > 0:
             caption_str = caption_as_list[0].text
             ## Split the whole string into a list of words
             caption_word_list = caption_str.replace('\n', ' ').replace('.', '')        .replace(',', '').replace('!', '').replace('?', '').split(' ')
-        
+            
         caption_length = len(caption_word_list)
-
-        ## Derive the hashtag and @ data
+            
+        # Derive the hashtag and @ data
         has_hashtag = False
         hashtag_count = 0
 
         has_at = False
         at_count = 0
-
-        ## Iterate through the caption words to count hashtags and @s
-        for word in caption_word_list:
-            if '#' in word:
+        
+        # Iterate through the caption words to count hashtags and @s
+        for each in caption_word_list:
+            if '#' in each:
                 hashtag_count += 1
-            elif '@' in word:
+            elif '@' in each:
                 at_count += 1
             else:
                 pass
 
-        ## Record whether or the post has hashtags and @s
+        # Record whether or the post has hashtags and @s
         if hashtag_count > 0:
             has_hashtag = True
-
+        
         if at_count > 0:
             has_at = True
+
+    # This section of the codes saves the record
 
         # Construct the dictionary to hold post data
         post_data_dict = {
@@ -148,25 +167,22 @@ for account_name in accounts_list:
             'has_at': has_at,
             'at_count': at_count
         }
-
+        
         # Update post data list
-        # but only if it's not a repeat.
-        # A repeat would indicate the new page did not load,
-        # meaning that we're being rate-limited
-        if post_data_dict not in post_data_list:
-            post_data_list.append(post_data_dict)
-        # Wait for 10 minutes if rate-limited
-        else:
-            time.sleep(60 * 10)
-
-        # Keep track of progress
+        post_data_list.append(post_data_dict)
+        
+    # This section of the code keeps track of progress
         already_recorded = len(post_data_list)
         total_to_record = len(post_urls_list)
         time_check = datetime.strftime(datetime.now(), '%I: %M: %S.%f')
-        print(f'{account_name} -- {time_check}: {already_recorded} of {total_to_record}')
+        print(f'{account_name} -- {time_check}: {already_recorded} of {total_to_record} -- {post_type}')
 
     # CLose the browser at the end
     driver.close()
+
+
+    # In[ ]:
+
 
     # Append account data dictionary and save to new json file
     account_data_dict = json.load(open(f'data/{account_name}.json'))
