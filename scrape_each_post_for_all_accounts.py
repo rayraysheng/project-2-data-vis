@@ -22,8 +22,6 @@ from bs4 import BeautifulSoup as bs
 
 # Here are the account names
 accounts_list = [
-    'aliceandolivia',
-    'coach',
     'ferragamo',
     'chloe',
     'gucci'
