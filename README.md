@@ -66,15 +66,15 @@ We plan to extract images from the instagram account of these brands (the recent
 ### Summary of useful color analysis JS libraries: 
 Get-image-colors: https://www.npmjs.com/package/get-image-colors 
 The most comprehensive library tool that outputs the hex of all colors in each image
----
+
 Colorify: http://colorify.rocks/index.html#getMainColor 
 A mini color tool that can realize different functions, including extracting the main color in the image
----
+
 Rgbaster: https://www.npmjs.com/package/rgbaster  
 A more straightforward tool to just get the dominant color in the image
----
+
 Vibrant: http://jariz.github.io/vibrant.js/  
 A library that can output the vibrant/muted/dark colors etc..
----
+
 Links to explore: 
 http://mkweb.bcgsc.ca/color-summarizer/?examples
