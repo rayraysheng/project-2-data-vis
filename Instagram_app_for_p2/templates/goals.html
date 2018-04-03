@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Project 2</title>
+
+        <link rel="stylesheet" href="reset.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+        <link rel="stylesheet" href="test.css">
+        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>  
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+        <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+        <script src="https://d3js.org/d3.v4.min.js"></script>
+    </head>
+    <body>
+        <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">Project 2</a> 
+            </div>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/goals">Goals</a></li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" > Graphs
+                    <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                          <li><a href="/accounts_overview">Accounts Overview</a></li>
+                          <li><a href="/hashtag_vs_interaction">Number of #hashtags</a></li>
+                          <li><a href="/frequency_vs_interaction">Post Frequency</a></li>
+                          <li><a href="/day_of_the_week_vs_post_count">Activity throughout the Week</a></li>
+                        </ul>
+                </li>
+                <li><a href="/conclusion">Conclusion</a></li>
+            </ul>
+        </div>
+        </nav>
+        <div class="container">
+                <div class="row">
+                    <h1><img src="{{ url_for('static', filename='likes.png') }}" /><strong>Social Media Strategy</strong> </h1> 
+                    <hr>
+                    <div class="col-md-12">
+                        <h2>Project's Goals</h2> 
+                        <br/>
+                        <p> 
+                            Our project aims to understand how companies want to share their data in order to 
+                            gain more popularity over the Social Media World.
+                            We approched it getting first data from Instagram and than analyzing them, after a deep
+                            analyzation we draw some interesting graphs, showing us the correlation of some features that have been
+                            considered the most important for the strategy from our point of view. 
+                            So, our analysis overview is primarly given from our graphs.
+                        </p>
+                        <p>
+                            <ol>
+                            <li>
+                                <h5>Account Overview</h5>
+                                Three bar charts showing on the X-axis the brand and on the Y-axis the: 
+                                (1) total number of posts; 
+                                (2) total number of followers; 
+                                (3) total number of accounts that each brand account follows.
+                            </li>
+                            <li>
+                                <h5>Number of Hashtags vs Audience Interaction</h5>
+                                Line chart showing on the X-axis the number of hashtags used and on the Y-axis the: 
+                                (1) average likes per picture per follower; 
+                                (2) average views per video per follower; 
+                                (3) average number of likes per album (i.e., a post with more than one picture or video).
+                                Individual brands can be selected by accessing a drop-down menu.
+                            </li>
+                            <li>
+                                <h5>Post Frequency vs. Audience Interaction</h5>
+                                Bubble chart showing on the X-axis the posting frequency and 
+                                on the Y-axis the number of likes (for pictures) or views (for videos). 
+                                Each bubble represents a company and its size captures the average number of followers for that brand.
+                            </li>
+                            <li>
+                                <h5>Days of the Week vs Account Activities</h5>
+                                Three bar charts showing on the X-axis the day of the week and on the Y-axis the: 
+                                (1) total number of posts; 
+                                (2) total number of likes and views; 
+                                (3) average number of likes and views.
+                                Individual brands can be selected by accessing a drop-down menu.
+                            </li>
+                            </ol>
+                        </p>
+                    </div>
+                <br />
+                <!-- <div class="container">
+                    <h1 id="visualization">Visualization</h1>
+                    <br />
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h4>Number of Followers vs posting frequency</h4>
+                            <img src="#"> <br />
+                            <a href="followersVSfreq.html">Show more details</a>
+                        </div>
+                        <div class="col-md-6">
+                            <h4>Number of posts vs time period</h4>
+                            <img src="#"> <br />
+                            <a href="postsVStime.html">Show more details</a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h4>Number of likes vs time period</h4>
+                            <img src="#"> <br />
+                            <a href="postsVSlikes.html">Show more details</a>
+                        </div>
+                        <div class="col-md-6">
+                            <h4>Number of Hashtag vs Number of likes</h4>
+                            <img src="#"> <br />
+                            <a href="hashVSlikes.html">Show more details</a>
+                        </div>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+    </body>
+</html>        

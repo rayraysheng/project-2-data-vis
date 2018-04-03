@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset='utf-8'>
+        <title>Project 2</title>
+
+        <link rel="stylesheet" href="reset.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+        <link rel="stylesheet" href="test.css">
+        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>  
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+        <script src="https://d3js.org/d3.v4.min.js"></script>
+        <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="index.html">Project 2</a> 
+            </div>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="goals.html">Goals</a></li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" > Graphs
+                    <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="account_overview.html">Accounts Overview</a></li>
+                            <li><a href="hash_vs_inter.html">Hashtag count vs Interaction</a></li>
+                            <li><a href="freq_vs_inter.html">Frequency vs Interaction</a></li>
+                            <li><a href="day_vs_post.html ">Day of the week vs Post count</a></li>
+                        </ul>
+                </li>
+                <li><a href="conclusion.html">Conclusion</a></li>
+            </ul>
+        </div>
+        </nav>
+        <div class="container">
+                <div class="row">
+                    <h1><img src="likes.png" /><strong>Social Media Strategy</strong> </h1> 
+                    <hr>
+                    <div class="col-md-12">
+                        <h2>Project's Goals</h2> 
+                        <br/>
+                        <p> 
+                            Our project aims to understand how companies want to share their data in orther to 
+                            gain more popularity over the Social Media World.
+                            We approchwd it getting first data from Instagram and than analyzing them, after a deep
+                            analyzation we draw some interesting graphs, showing us the correlation of some features that have been
+                            considered the most important for the strategy from our point of view. 
+                            So, our analysis overview is primarly given from our graphs.
+                        </p>
+                        <p>
+                            <ol>
+                            <li>
+                                <h5>Number of Followers vs posting frequency</h5>
+                                This graph is a Bubble Chart showing on the X-axis the "posting frequency"
+                                and on the Y-axis the "number of followers". Each bubble has a different size
+                                that describes the average number of likes for all the posts of each brand.
+                            </li>
+                            <li>
+                                <h5>Number of posts vs time period</h5>
+                                This graph is a Line Chart showing on the X-axis the "time of the day" and on the Y-axis
+                                the "number of posts". Each line desribes a brand, so we are going to have 10 different lines.
+                            </li>
+                            <li>
+                                <h5>Number of likes vs time period</h5>
+                                This graph is still a Line chart but this time showing on the X-axis the "time of the day"
+                                and o nthe Y-axis the "number of likes". Each line describes a bran, so we are going to have
+                                10 different lines.
+                            </li>
+                            <li>
+                                <h5>Number of Hashtag vs Number of likes</h5>
+                                This graph is a Scatter Plot, showing on the X-axis the "Number of hashtags used" and on the 
+                                Y-axis the "number of likes". This graph is going to describe separately each brand that you can choose 
+                                with the drop-down menu.
+                            </li>
+                            </ol>
+                        </p>
+                    </div>
+                <br />
+                <div class="container">
+                    <h1 id="visualization">Visualization</h1>
+                    <br />
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h4>Number of Followers vs posting frequency</h4>
+                            <img src="#"> <br />
+                            <a href="followersVSfreq.html">Show more details</a>
+                        </div>
+                        <div class="col-md-6">
+                            <h4>Number of posts vs time period</h4>
+                            <img src="#"> <br />
+                            <a href="postsVStime.html">Show more details</a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h4>Number of likes vs time period</h4>
+                            <img src="#"> <br />
+                            <a href="postsVSlikes.html">Show more details</a>
+                        </div>
+                        <div class="col-md-6">
+                            <h4>Number of Hashtag vs Number of likes</h4>
+                            <img src="#"> <br />
+                            <a href="hashVSlikes.html">Show more details</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>        

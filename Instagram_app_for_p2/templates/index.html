@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Project 2</title>
+
+        <link rel="stylesheet" href="reset.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+        <link rel="stylesheet" href="test.css">
+        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>  
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+        <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+        <script src="https://d3js.org/d3.v4.min.js"></script>
+    </head>
+    <body>
+        <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">Project 2</a> 
+            </div>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/goals">Goals</a></li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" > Graphs
+                    <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                          <li><a href="/accounts_overview">Accounts Overview</a></li>
+                          <li><a href="/hashtag_vs_interaction">Number of #hashtags</a></li>
+                          <li><a href="/frequency_vs_interaction">Post Frequency</a></li>
+                          <li><a href="/day_of_the_week_vs_post_count">Activity throughout the Week</a></li>
+                        </ul>
+                </li>
+                <li><a href="/conclusion">Conclusion</a></li>
+            </ul>
+        </div>
+        </nav>
+        <div class="container">
+            <div class="row">
+                <h1><img src="{{ url_for('static', filename='likes.png') }}" /><strong>Social Media Strategy</strong> </h1> 
+                <hr>
+                <div class="col-md-8">
+                    <h2>Proposal</h2> 
+                    <br/>
+                    <p> Today the entire world is affected by the invasion of Social Media, with
+                        <strong id="instagram">Instagram</strong> currently being the most popular.
+                        Unlike facebook, snapchat etc., Instagram focuses on pictures and videos.
+                        We are going to pretend to be a consulting company that provides fashion brands
+                        with sugggestions on how making their instagram presence more followed. <br/>
+                        <br/>
+                        Most of us, browsing into Instagram, may have found ourselves picking some 
+                        interesting brands to be analysed. We have been focusing on the fashion side. 
+                        Every fashion brand that we chose has thousands of posts, million of followers and million of likes but we detected some 
+                        differences among them. <br/>
+                        <br/>
+                        We want to understand whether items such as hashtag count, daily sechedule, etc.
+                        affect the post popularity.
+                    </p>
+                </div>
+                <div class="col-md-4">
+                    <h2>Brands</h2>
+                    <hr>
+                    <p>
+                        <ul>
+                            <li>Burberry</li>
+                            <li>Maje</li>
+                            <li>Gucci</li>
+                            <li>Tory Burch</li>
+                            <li>Michael Kors</li>
+                            <li>Banana Republic</li>
+                            <li>Alice and Oliva</li>
+                            <li>Coach</li>
+                            <li>Salvatore Ferragamo</li>
+                            <li>Chloe</li>
+                        </ul>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
